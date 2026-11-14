@@ -37,7 +37,21 @@ every page, checkout skips Stripe and issues test licenses flagged `d: 1`.
    you can't issue keys that your shipped plugins will accept.
 3. **Installers.** Upload them to a private bucket and set `INSTALLER_BASE_URL`.
    File names: `<slug>-mac.pkg`, `<slug>-win.exe`, `<slug>-linux.tar.gz`.
-4. Set `NEXT_PUBLIC_DEMO_MODE=false`, then deploy (Vercel works out of the box).
+4. Set `NEXT_PUBLIC_DEMO_MODE=false`, then deploy.
+
+## Deploy (Cloudflare Workers)
+
+Deployed as the Worker `plugin-store-demo` via [OpenNext](https://opennext.js.org/cloudflare).
+Config lives in `wrangler.jsonc` and `open-next.config.ts`.
+
+- Cloudflare build command: `npm run build` (runs the OpenNext build, which runs `next build`)
+- Cloudflare deploy command: `npx wrangler deploy`
+- Local preview in the Workers runtime: `npm run preview`
+- Plain Next.js build: `npm run build:next`
+
+Put secrets (`STRIPE_SECRET_KEY`, `LICENSE_PRIVATE_KEY`) in the Worker's
+**Settings → Variables and Secrets** as *secrets*. Non-secret vars can go in `wrangler.jsonc`.
+If you rename the Worker, change both `name` and the `WORKER_SELF_REFERENCE` service in `wrangler.jsonc`.
 
 ## How licensing works
 

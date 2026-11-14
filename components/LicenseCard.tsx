@@ -4,6 +4,10 @@ import Link from "next/link";
 import { getPlugin } from "@/lib/plugins";
 import { downloadLicenseFile, type StoredLicense } from "@/lib/licenseStore";
 
+const MONTHS = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+// Manual format: server (Cloudflare) and browser can disagree on Intl output, which breaks hydration.
+const fmtDate = (sec: number) => { const d = new Date(sec * 1000); return `${d.getUTCDate()} de ${MONTHS[d.getUTCMonth()]} de ${d.getUTCFullYear()}`; };
+
 const OS = [
   { id: "mac", label: "macOS (.pkg)" },
   { id: "win", label: "Windows (.exe)" },
@@ -30,7 +34,7 @@ export default function LicenseCard({ l, onRemove }: { l: StoredLicense; onRemov
             {p ? <Link href={`/plugins/${p.slug}`} className="hover:text-coral">{name}</Link> : name}
           </h3>
           <p className="mt-1 text-[13px] text-meta">v{p?.version} · {l.email}</p>
-          <p className="text-[13px] text-meta">Emitida el {new Date(l.issued * 1000).toLocaleDateString("es-MX", { dateStyle: "long" })}</p>
+          <p className="text-[13px] text-meta">Emitida el {fmtDate(l.issued)}</p>
         </div>
         <div className="md:col-span-8">
           <p className="label mb-2 text-meta">Llave de licencia</p>

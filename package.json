@@ -1,13 +1,16 @@
 {
-  "name": "lonare-audio-store",
+  "name": "plugin-store-demo",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "opennextjs-cloudflare build",
     "start": "next start",
     "keys": "node scripts/generate-keys.mjs",
-    "verify": "node scripts/verify-license.mjs"
+    "verify": "node scripts/verify-license.mjs",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "build:next": "next build"
   },
   "dependencies": {
     "@fontsource/space-grotesk": "^5.3.0",
@@ -19,11 +22,13 @@
     "stripe": "^23.1.0"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "^1.20.17",
     "@types/node": "^26.6.6",
     "@types/react": "^19.3.0",
     "autoprefixer": "^10.6.2",
     "postcss": "^8.5.33",
     "tailwindcss": "^3.4.19",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "wrangler": "^4.162.0"
   }
 }
