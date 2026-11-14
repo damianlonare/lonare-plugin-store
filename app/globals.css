@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { color: #161616; background: #fff; -webkit-font-smoothing: antialiased; }
+  body { @apply font-sans text-[15px] leading-6; letter-spacing: -0.005em; }
+  h1, h2, h3, h4 { @apply font-display text-ink font-bold; }
+  ::selection { background: #D15B51; color: #fff; }
+}
+
+@layer components {
+  .wrap { @apply mx-auto w-full max-w-page px-4 md:px-8 lg:px-16; }
+  .label { @apply font-display text-[11px] font-bold uppercase leading-[14px] tracking-[0.08em]; }
+  .h-xl { @apply text-[36px] leading-[40px] tracking-[-0.03em] md:text-[56px] md:leading-[60px] md:tracking-[-0.04em]; }
+  .h-lg { @apply text-[28px] leading-[32px] tracking-[-0.02em] md:text-[40px] md:leading-[44px] md:tracking-[-0.03em]; }
+  .h-md { @apply text-2xl font-semibold leading-7 tracking-[-0.02em]; }
+  .btn { @apply inline-flex items-center justify-center gap-2 border px-5 py-3 font-display text-[13px] font-semibold uppercase tracking-[0.06em] transition-colors disabled:cursor-not-allowed disabled:opacity-50; }
+  .btn-primary { @apply btn border-coral bg-coral text-white hover:border-coral-hover hover:bg-coral-hover; }
+  .btn-outline { @apply btn border-ink bg-transparent text-ink hover:bg-ink hover:text-white; }
+  .link { @apply text-coral underline underline-offset-4 hover:text-coral-hover; }
+  .chip { @apply label inline-flex items-center border border-line bg-white px-2 py-1 text-body; }
+  .chip-on { @apply chip border-ink bg-ink text-white; }
+  .cell { @apply border border-line bg-white; }
+  .input { @apply w-full border border-line bg-white px-3 py-2.5 text-[15px] outline-none focus:border-ink; }
+}
