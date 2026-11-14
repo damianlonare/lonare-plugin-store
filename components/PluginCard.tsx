@@ -1,17 +1,20 @@
 import Link from "next/link";
 import type { Plugin } from "@/lib/plugins";
-import { usd } from "@/lib/plugins";
+import { CATEGORY_LABEL, usd } from "@/lib/plugins";
+import type { Lang } from "@/lib/i18n";
+import { dict } from "@/lib/i18n";
 import PluginArt from "./PluginArt";
 import AddToCart from "./AddToCart";
 
-export default function PluginCard({ plugin, index }: { plugin: Plugin; index?: number }) {
+export default function PluginCard({ plugin, index, lang }: { plugin: Plugin; index?: number; lang: Lang }) {
+  const t = dict(lang);
   return (
     <article className="group flex flex-col border border-line bg-white transition-colors hover:border-ink">
       <div className="flex items-center justify-between border-b border-line px-4 py-2">
         <span className="label text-meta">
-          {index !== undefined ? `${String(index + 1).padStart(2, "0")} // ` : ""}{plugin.category}
+          {index !== undefined ? `${String(index + 1).padStart(2, "0")} // ` : ""}{CATEGORY_LABEL[plugin.category][lang]}
         </span>
-        {plugin.isNew && <span className="label text-coral">● Nuevo</span>}
+        {plugin.isNew && <span className="label text-coral">● {t.card.new}</span>}
       </div>
       <Link href={`/plugins/${plugin.slug}`} className="block"><PluginArt plugin={plugin} /></Link>
       <div className="flex flex-1 flex-col p-4">

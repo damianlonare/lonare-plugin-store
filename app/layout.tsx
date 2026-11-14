@@ -6,26 +6,39 @@ import "@fontsource/space-grotesk/600.css";
 import "@fontsource/space-grotesk/700.css";
 import "./globals.css";
 import DemoBar from "@/components/DemoBar";
+import DemoToast from "@/components/DemoToast";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/components/CartProvider";
+import { LangProvider } from "@/components/LangProvider";
 import { BRAND } from "@/lib/plugins";
+import { getDict } from "@/lib/lang";
 
-export const metadata: Metadata = {
-  title: { default: `${BRAND.name} — Plugins VST3 / AU / CLAP`, template: `%s · ${BRAND.name}` },
-  description: BRAND.tagline,
-};
+// Every page depends on the visitor's language cookie.
+export const dynamic = "force-dynamic";
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export async function generateMetadata(): Promise<Metadata> {
+  const { lang, t } = await getDict();
+  return {
+    title: { default: `${BRAND.name} — ${t.meta.title}`, template: `%s · ${BRAND.name}` },
+    description: BRAND.tagline[lang],
+  };
+}
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const { lang } = await getDict();
   return (
-    <html lang="es" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+    <html lang={lang} className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <body>
-        <CartProvider>
-          <DemoBar />
-          <Header />
-          <main>{children}</main>
-          <Footer />
-        </CartProvider>
+        <LangProvider lang={lang}>
+          <CartProvider>
+            <DemoBar />
+            <Header />
+            <main>{children}</main>
+            <Footer />
+            <DemoToast />
+          </CartProvider>
+        </LangProvider>
       </body>
     </html>
   );

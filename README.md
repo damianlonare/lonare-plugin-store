@@ -69,9 +69,21 @@ the signature offline, so it never needs internet. In the plugin:
 
 Keys are deterministic per order + plugin, so reloading `/gracias` shows the same keys.
 
+## Languages (ES / EN)
+
+Every page is available in Spanish and English. The **ES | EN** switch in the header saves the
+choice in a `lnr_lang` cookie. First-time visitors get their browser's language (Spanish fallback).
+UI text lives in `lib/i18n.ts`; plugin copy (tagline, description, features) has `es` and `en`
+fields in `lib/plugins.ts`. Stripe Checkout opens in the same language.
+
+## Demo toast
+
+While demo mode is on, a one-time toast (once per browser session) explains the store is a
+showcase demo. It's `components/DemoToast.tsx`, next to the demo bar in `components/DemoBar.tsx`.
+
 ## Editing the catalog
 
-Everything is in `lib/plugins.ts`: names, copy, prices, formats, bundle rule and brand name.
+Everything is in `lib/plugins.ts`: names, copy (in both languages), prices, formats, bundle rule and brand name.
 The plugins there are **placeholders** taken from the Stitch mockups. Swap in your real ones.
 Cover art is generated from each plugin's `hue` until you add real screenshots.
 

@@ -19,8 +19,9 @@ export function removeLicense(key: string) {
   try { localStorage.setItem(KEY, JSON.stringify(next)); } catch {}
   return next;
 }
-export function downloadLicenseFile(l: StoredLicense, name: string) {
-  const text = `# ${name}\n# Serial: ${l.serial}\n# Licenciado a: ${l.email}\n# Pega la siguiente línea en el plugin (o arrastra este archivo sobre él)\n${l.key}\n`;
+export function downloadLicenseFile(l: StoredLicense, header: string) {
+  const text = `${header}${l.key}
+`;
   const url = URL.createObjectURL(new Blob([text], { type: "text/plain" }));
   const a = Object.assign(document.createElement("a"), { href: url, download: `${l.slug}.lnrlic` });
   a.click();

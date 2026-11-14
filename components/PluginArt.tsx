@@ -8,7 +8,7 @@ export default function PluginArt({ plugin, large = false }: { plugin: Plugin; l
   const knobs = Array.from({ length: 4 }, () => rnd());
   const bars = Array.from({ length: 36 }, () => 0.15 + rnd() * 0.85);
   return (
-    <svg viewBox="0 0 400 260" className="block h-auto w-full bg-[#141414]" role="img" aria-label={`Interfaz de ${plugin.name}`}>
+    <svg viewBox="0 0 400 260" className="block h-auto w-full bg-[#141414]" role="img" aria-label={plugin.name}>
       <rect x="0.5" y="0.5" width="399" height="259" fill="none" stroke="#2a2a2a" />
       <text x="20" y="32" fill="#f4f4f6" fontFamily="Space Grotesk, sans-serif" fontWeight="700" fontSize="15" letterSpacing="-0.3">
         {plugin.name.toUpperCase()}
